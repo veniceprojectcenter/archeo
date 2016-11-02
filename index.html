@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+	<head>
+		<title> Team archeo website </title>	<!--Change for tab header-->
+		<style type="text/css">
+		
+		h1{font-weight:bold;
+		text-align:center;
+		padding:20px;
+		font-family:arial;
+		}
+		
+		.topright{
+		position:absolute;
+		top:0;
+		right:0;
+		padding:20px;
+		}
+		<!--Preset to place things in the top right corner-->
+		
+		.topleft{
+		position:absolute;
+		top:0;
+		left:0;
+		}
+		<!--Preset to place things in the top left corner-->
+		
+		.map{
+		border:2px solid blue;
+		position:absolute;
+		top:70;
+		left:0;
+		}
+		</style>
+	</head>
+	
+	<body>
+		<div class="topleft"> <h1> Unearthing Patterns in Venetian History </h1> </div>			<!--Change for title of the page-->
+		<div class="topright"> <a href="loginpage.html"> Log in </a> </div>
+		<div class="map"> <img src="venice_map.gif" style="max-width:50%; max-height:70%;"></div>
+		
+		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>				<!--Firebase-specific code-->
+		<script src="app.js"></script>
+	</body>
+</html>

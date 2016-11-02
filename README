@@ -1,0 +1,15 @@
+Start the app with
+
+on Linux/Mac
+  python -m SimpleHTTPServer
+
+on Windows
+  python -m http.server
+
+And browse to localhost:8000
+
+We use:
+  https://jquery.com/
+  http://materializecss.com/
+  https://material.io/icons/
+

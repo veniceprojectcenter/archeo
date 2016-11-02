@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+	<head>
+		<title> Log in </title>	<!--Change for tab header-->
+		<style type="text/css">
+		
+		h1,h2{font-weight:bold;
+		text-align:center;
+		padding:20px;
+		font-family:arial;
+		}
+		
+		.center{
+		height: 200px;
+		width: 300px;
+		text-align:center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -100px;
+		margin-left: -200px;
+		}
+		
+		.topright{
+		position:absolute;
+		top:0;
+		right:0;
+		padding:20px;
+		}
+		<!--Preset to place things in the top right corner-->
+		
+		.topleft{
+		position:absolute;
+		top:0;
+		left:0;
+		}
+		<!--Preset to place things in the top left corner-->
+		
+		footer{
+		width: 100%;
+		background-color: #222;
+		padding:30px 0px;
+		}
+		
+		</style>
+	</head>
+	
+	<body>
+		<div id="loading_div">
+			Loaging
+		</div>
+		
+		<div id="main_app_div" style="display: none">
+			My App
+		</div>
+		
+		<div id="login_form_div" style="display: none">
+			<div class="topleft"> <h1> Unearthing Patterns in Venetian History </h1> </div>				<!--Change for title of the page-->
+			
+			<div class="topright"> <a href="index.html"> Back </a> </div>								<!--Back button-->
+			<div class="center">																		<!--Login form-->
+				<h2>Login to Web App</h2>
+				<form method="post" id="login_form">
+					<p><input id="txtEmail" type="text" name="login" value="" placeholder="Email"></p>				<!--Email box-->
+			
+					<p><input id="txtPassword" type="password" name="password" value="" placeholder="Password"></p>		<!--Password box-->
+			
+					<p class="remember_me">
+					<label>
+						<input type="checkbox" name="remember_me" id="remember_me">						<!--Remember me chckbox-->
+						Remember me on this computer
+					</label>
+					</p>
+					<p class="submit"><input id="btnSubmit" type="submit" name="commit" value="Login"></p>				<!--Submit button-->
+				</form>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+		
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>				<!--Firebase-specific code-->
+		<script src="app.js"></script>
+	</body>
+</html>
