@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gejson with leaflet</title>
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <script type="text/javascript">
+    var my_geojson = '/first_layer.json';
+    var geojsonLayer;
+    
+    $('document').ready(function(){
+      var map = L.map('map'); //.setView([39.74739, -105], 13);
+      L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      var show_edificio = true;
+      geojsonLayer = L.geoJson.ajax(my_geojson, {
+        style: function(feature) {
+          // return {color: feature.properties.GPSUserColor};
+          return {
+            color: (feature.properties['Simboli'] == 'Edificio' ? 'red' : 'blue')
+          };
+        },
+        pointToLayer: function(feature, latlng) {
+          console.log("ok");
+          if (show_edificio)
+            return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+          else if (feature.properties['Simboli'] != 'Edificio')
+            return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+          
+          // return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
+          
+          // var myIcon = new L.icon({
+          //   iconUrl: '/venice_map.gif',
+          //   iconSize:     [38, 95], // size of the icon
+          //   shadowSize:   [50, 64], // size of the shadow
+          //   iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          //   shadowAnchor: [4, 62],  // the same for the shadow
+          //   popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+          // });
+          // return new L.marker(latlng, {icon: myIcon}).addTo(map);
+        },
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(feature.properties.Epoche);
+        }
+      });
+      geojsonLayer.addTo(map).on('click', my_click);
+      var baseMaps = {
+        // "Grayscale": grayscale,
+        // "Streets": streets
+      };
+      var overlayMaps = {
+        "My First Layer": geojsonLayer
+      };
+      L.control.layers(baseMaps, overlayMaps).addTo(map);
+      geojsonLayer.on('data:loaded', function() {
+        map.fitBounds(geojsonLayer.getBounds());
+      });
+      
+      var popup = L.popup();
+      function my_click(e) {
+        popup
+          .setLatLng(e.latlng)
+          .setContent("You clicked the map at " + e.latlng.toString())
+          .openOn(map);
+      }
+      
+      $('#hide_edifici').on('click', function(){
+        console.log("Refilter");
+        show_edificio = show_edificio ? false : true;
+        geojsonLayer.refilter();
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id='map' style="width: 100%; height: 600px;"></div>
+  
+  <div id="hide_edifici" style="position: absolute;
+    right: 10em;
+    top: 0px;
+    background-color: blue;
+    color: white;
+    margin: 2em;
+    z-index: 1000;">Hide/Show Edifici</div>
+</body>
+</html>
