@@ -1,0 +1,49 @@
+var elements = {
+  ckid: "value..."
+}
+firebase.database().ref().child('groups').child('Site').child('members').once('value', function(member_val){
+  var members = member_val.val();
+  for (var key in members) {
+    firebase.database().ref().child('data').child(key).child('data').child('name').once('value', function(name_val){
+      elements[key] = name_val.val();
+    });
+  }
+});
+ng-repeat="item in items | filter:{item.id == myitems}
+<input type=text... ng-model="bc.search_text"
+<ul>
+  <li ng-repeat="element in elements | filter:{item.id == bc.search_text}">sss</li>
+</ul>
+
+var search_for = $('#seach').val();
+var results = [];
+var keys = []
+firebase.database().ref().child('data').orderByValue('data/name').startAt(search_for).on('value', function(element){
+  var key = element.key().key(); // ck_id
+  if (keys.indexOf(key) >= 0) {
+    console.log("Already present");
+  } else {
+    results << element.val();
+  }
+});
+firebase.database().ref().child('data').orderByValue('data/description').startAt(search_for).on('value', function(element){
+  results << element.val();
+});
+
+bc.elements = {
+  shares: 'Shares',
+  nphotos: 'Number of Photos'
+}
+<div ng-repeat="(key, label) in bc.elements">
+  <b>{{label}}<b>
+  <input type="text" ng-model="ngsite[key]">
+</div>
+
+console.log("SiteID", site_id);
+bc.site_ref = firebase.database().ref()
+  .child('data')
+  .child(site_id)
+  .child('data');
+bc.site_info = $firebaseObject(bc.site_ref);
+bc.site_info.$bindTo($scope, "ngsite");
+
